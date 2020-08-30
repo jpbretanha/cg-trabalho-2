@@ -1,10 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo } from 'react'
 
 import useFish from './useFish'
 
-export default function Model(props) {
+import { getFishAnimation } from '../helpers/animations'
+
+export default function Model() {
   const group = useRef()
-  const { nodes, materials, ...shark } = useFish(props, group, '/hammerhead.glb')
+
+  const fishProps = useMemo(() => {
+    return getFishAnimation('Hammerhead')
+  }, [])
+
+  const { nodes, materials, ...shark } = useFish(fishProps, group, '/hammerhead.glb')
 
   return (
     <group ref={group} dispose={null}>

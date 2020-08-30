@@ -1,9 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo } from 'react'
+
 import useFish from './useFish'
+
+import { getFishAnimation } from '../helpers/animations'
 
 export default function BlueFish(props) {
   const group = useRef()
-  const { nodes, materials, ...fish } = useFish(props, group, '/blue-fish.glb')
+
+  const fishProps = useMemo(() => {
+    return getFishAnimation('BlueFish')
+  }, [])
+
+  const { nodes, materials, ...fish } = useFish(fishProps, group, '/blue-fish.glb')
 
   return (
     <group ref={group} {...fish} dispose={null}>

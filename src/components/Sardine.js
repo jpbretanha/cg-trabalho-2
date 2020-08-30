@@ -5,7 +5,7 @@ import { draco } from 'drei'
 import { useBox } from 'use-cannon'
 
 export default function Model(props) {
-  const [ref] = useBox(() => ({ mass: 1, position: [0, 0, 20], rotation: [0.4, 0.5, 0.5], ...props }))
+  const ref = useRef()
   const { nodes, materials } = useLoader(GLTFLoader, '/sardine.glb', draco('/draco-gltf/'))
   return (
     <group ref={ref} dispose={null}>

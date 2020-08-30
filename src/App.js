@@ -74,7 +74,7 @@ const App = () => {
             ))}
             <Particles count={10000} mouse={mouse} />
             <Sparks count={20} mouse={mouse} radius={20} colors={['#1d4c8d', '#e0feff', '#1d4c8d', 'lightblue']} />
-            <Fishes count={10} />
+            <Fishes count={20} />
             <Effects down={down} mouse={mouse} />
             {/* </Rig> */}
           </Suspense>
