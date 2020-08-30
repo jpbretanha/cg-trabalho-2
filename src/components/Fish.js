@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react'
 
-import useFish from './useFish'
+import useFish from '../hooks/useFish'
 
 import { getFishAnimation } from '../helpers/animations'
 

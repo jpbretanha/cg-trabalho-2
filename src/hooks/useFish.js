@@ -9,7 +9,9 @@ export default function Model(props, ref, url) {
   const { nodes, materials, animations } = useLoader(GLTFLoader, url, draco('/draco-gltf/'))
 
   const [mixer] = useState(() => new THREE.AnimationMixer())
-  useEffect(() => void mixer.clipAction(animations[0], ref.current).play(), [])
+  useEffect(() => {
+    if (animations && animations.length > 0) mixer.clipAction(animations[0], ref.current).play()
+  }, [])
   useFrame((_, delta) => {
     ref.current.rotation.y += Math.sin((delta * factor) / 2) * Math.cos((delta * factor) / 2) * 1.5
     mixer.update(delta * speed)

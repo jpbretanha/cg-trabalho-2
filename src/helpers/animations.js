@@ -17,3 +17,18 @@ export const getFishAnimation = fishType => {
     rotation: [0, x > 0 ? Math.PI : 0, 0]
   }
 }
+
+export const getSardineAnimation = () => {
+  const x = (30 + Math.random() * 30) * (Math.round(Math.random()) ? -1 : 1)
+  const y = -30 + Math.random() * 20
+  const z = -30 + Math.random() * 20
+  const speed = 50
+  const factor = 0.6 + Math.random()
+
+  return {
+    speed,
+    factor,
+    position: [x, y, z],
+    rotation: [0, x > 0 ? Math.PI : 0, 0]
+  }
+}

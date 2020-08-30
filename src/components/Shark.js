@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react'
 
-import useFish from './useFish'
+import useFish from '../hooks/useFish'
 
 import { getFishAnimation } from '../helpers/animations'
 
@@ -16,7 +16,7 @@ export default function Model() {
   return (
     <group ref={group} dispose={null}>
       <scene name='Scene' {...shark} scale={[6, 6, 6]}>
-        <group rotation={[-Math.PI / 2, 0, 180]}>
+        <group rotation={[-Math.PI / 2, 0, Math.PI]}>
           <group rotation={[Math.PI / 2, 0, 0]}>
             <group position={[0, 0.17, -0.47]}>
               <primitive object={nodes.GLTF_created_0_rootJoint} />

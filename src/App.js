@@ -6,9 +6,7 @@ import lerp from 'lerp'
 
 import Fishes from './components/Fishes'
 import Plane from './components/Plane'
-import Worm from './components/Worm'
 import Sardine from './components/Sardine'
-import Button from './components/Button'
 import Particles from './components/Particles'
 import Effects from './components/Effects'
 import Sparks from './components/Sparks'
@@ -31,19 +29,12 @@ function Rig({ children }) {
 }
 
 const App = () => {
-  const [hovered, hover] = useState(false)
   const [down, set] = useState(false)
   const mouse = useRef([0, 0])
   const onMouseMove = useCallback(
     ({ clientX: x, clientY: y }) => (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]),
     []
   )
-  const [worms, setWorms] = useState(0)
-
-  const addWorm = () => {
-    setWorms(state => state + 1)
-  }
-
   return (
     <>
       <Canvas
@@ -69,18 +60,17 @@ const App = () => {
           {/* <Food number={200} /> */}
           <Suspense fallback={<Dom center>loading ...</Dom>}>
             {/* <Rig> */}
-            {Array.from({ length: worms }).map(() => (
-              <Sardine />
-            ))}
-            <Particles count={10000} mouse={mouse} />
+            <Particles count={10} mouse={mouse} />
             <Sparks count={20} mouse={mouse} radius={20} colors={['#1d4c8d', '#e0feff', '#1d4c8d', 'lightblue']} />
             <Fishes count={20} />
+            {Array.from({ length: 40 }).map((_, index) => {
+              return <Sardine index={index} />
+            })}
             <Effects down={down} mouse={mouse} />
             {/* </Rig> */}
           </Suspense>
         </Physics>
       </Canvas>
-      <Button onClick={addWorm}>Dar comida</Button>
     </>
   )
 }
