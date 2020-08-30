@@ -8,7 +8,7 @@ import HammerHead from './HammerHead'
 export default function Fishes({ count }) {
   const fishes = useMemo(
     () =>
-      new Array(count).fill().map(() => {
+      Array.from({ length: count }).map(() => {
         const x = (15 + Math.random() * 30) * (Math.round(Math.random()) ? -1 : 1)
         const y = -15 + Math.random() * 20
         const z = -15 + Math.random() * 20
