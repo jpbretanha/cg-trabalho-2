@@ -35,7 +35,15 @@ export default function Sparks({ mouse, count, colors, radius = 10 }) {
         const pos = new THREE.Vector3(Math.sin(0) * radius * r(), Math.cos(0) * radius * r(), 0)
         const points = new Array(30).fill().map((_, index) => {
           const angle = (index / 20) * Math.PI * 2
-          return pos.add(new THREE.Vector3(Math.sin(angle) * radius * r(), Math.cos(angle) * radius * r(), 0)).clone()
+          return pos
+            .add(
+              new THREE.Vector3(
+                Math.sin(angle) * radius * r(),
+                Math.cos(angle) * radius * r(),
+                Math.cos(angle) * radius * r()
+              )
+            )
+            .clone()
         })
         const curve = new THREE.CatmullRomCurve3(points).getPoints(1000)
         return {

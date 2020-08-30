@@ -4,7 +4,7 @@ import { Canvas, Dom, useFrame } from 'react-three-fiber'
 import { Physics } from 'use-cannon'
 import lerp from 'lerp'
 
-import Fish from './components/Fish'
+import Fishes from './components/Fishes'
 import Plane from './components/Plane'
 import Worm from './components/Worm'
 import Button from './components/Button'
@@ -52,17 +52,18 @@ const App = () => {
         onMouseUp={() => set(false)}
         onMouseDown={() => set(true)}
         gl={{ alpha: false }}
-        camera={{ fov: 100, position: [0, 0, 30] }}
+        camera={{ fov: 100, position: [0, 0, 50] }}
         onCreated={({ gl }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping
           gl.setClearColor(new THREE.Color('#020207'))
         }}
       >
         {/* <color attach='background' args={['lightblue']} /> */}
-        <ambientLight />
-        <hemisphereLight intensity={0.35} />
-        <pointLight distance={100} intensity={4} color='white' />
+        {/* <ambientLight intensity={2} /> */}
+        {/* <hemisphereLight intensity={0.35} /> */}
+        <pointLight distance={100} intensity={1} color='white' />
         <Physics gravity={[0, 0, -2]}>
+          <Plane rotation={[-Math.PI / 2, 0, 0]} />
           {/* <Plane color={'transparent'} position={[0, 0, -2]} /> */}
           {/* <Plane color={'#1d4c8d'} position={[-6, 0, 0]} rotation={[0, 1, 0]} />
           <Plane color={'#1d4c8d'} position={[6, 0, 0]} rotation={[0, -1, 0]} />
@@ -70,17 +71,13 @@ const App = () => {
           <Plane color={'#1d4c8d'} position={[0, -6, 0]} rotation={[-1, 0, 0]} /> */}
           <Suspense fallback={<Dom center>loading ...</Dom>}>
             {/* <Rig> */}
-            <Fish position={[2, 0, 0]} />
             {Array.from({ length: worms }).map(() => (
               <Worm />
             ))}
             <Particles count={10000} mouse={mouse} />
-            <Sparks
-              count={20}
-              mouse={mouse}
-              colors={['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue']}
-            />
-            <Effects down={down} />
+            <Sparks count={20} mouse={mouse} radius={20} colors={['#1d4c8d', '#e0feff', '#1d4c8d', 'lightblue']} />
+            <Fishes count={10} />
+            <Effects down={down} mouse={mouse} />
             {/* </Rig> */}
           </Suspense>
         </Physics>
