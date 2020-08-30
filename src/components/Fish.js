@@ -7,8 +7,8 @@ export default function Fish(props) {
   const { nodes, materials, ...fish } = useFish(props, group, '/fish.glb')
 
   return (
-    <group ref={group} {...fish} dispose={null} scale={[0.05, 0.05, 0.05]}>
-      <scene name='Scene' {...fish}>
+    <group ref={group} dispose={null}>
+      <scene name='Scene' {...fish} scale={[0.05, 0.05, 0.05]}>
         <group rotation={[-Math.PI / 2, 0, 0]}>
           <group rotation={[Math.PI / 2, 0, 0]}>
             <primitive object={nodes._rootJoint} />

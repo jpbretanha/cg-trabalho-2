@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import React, { useRef, useMemo } from 'react'
 import { useFrame, useThree } from 'react-three-fiber'
 
+import Sardine from './Sardine'
+
 export default function Particles({ count, mouse }) {
   const mesh = useRef()
   const light = useRef()
@@ -47,17 +49,17 @@ export default function Particles({ count, mouse }) {
       dummy.rotation.set(s * 5, s * 5, s * 5)
       dummy.updateMatrix()
       // And apply the matrix to the instanced item
-      // mesh.current.setMatrixAt(i, dummy.matrix)
+      mesh.current.setMatrixAt(i, dummy.matrix)
     })
-    // mesh.current.instanceMatrix.needsUpdate = true
+    mesh.current.instanceMatrix.needsUpdate = true
   })
   return (
     <>
       <pointLight ref={light} distance={40} intensity={8} color='lightblue' />
-      {/* <instancedMesh ref={mesh} args={[null, null, count]}>
+      <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronBufferGeometry attach='geometry' args={[0.2, 0]} />
-        <meshPhongMaterial attach='material' color='#050505' />
-      </instancedMesh> */}
+        <meshPhongMaterial attach='material' color='transparent' />
+      </instancedMesh>
     </>
   )
 }

@@ -6,7 +6,7 @@ import { useBox } from 'use-cannon'
 
 export default function Model(props) {
   const { nodes, materials } = useLoader(GLTFLoader, '/worm.glb', draco('/draco-gltf/'))
-  const [ref] = useBox(() => ({ mass: 1, position: [0, 0, -150], rotation: [0.4, 0.5, 0.5], ...props }))
+  const [ref] = useBox(() => ({ mass: 1, position: [0, 0, 20], rotation: [0.4, 0.5, 0.5], ...props }))
   return (
     <group ref={ref} {...props} dispose={null} scale={[10, 10, 10]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>

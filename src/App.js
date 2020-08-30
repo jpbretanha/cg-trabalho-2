@@ -11,6 +11,7 @@ import Button from './components/Button'
 import Particles from './components/Particles'
 import Effects from './components/Effects'
 import Sparks from './components/Sparks'
+import Food from './components/Food'
 
 function Rig({ children }) {
   const outer = useRef()
@@ -63,12 +64,8 @@ const App = () => {
         {/* <hemisphereLight intensity={0.35} /> */}
         <pointLight distance={100} intensity={1} color='white' />
         <Physics gravity={[0, 0, -2]}>
-          <Plane rotation={[-Math.PI / 2, 0, 0]} />
-          {/* <Plane color={'transparent'} position={[0, 0, -2]} /> */}
-          {/* <Plane color={'#1d4c8d'} position={[-6, 0, 0]} rotation={[0, 1, 0]} />
-          <Plane color={'#1d4c8d'} position={[6, 0, 0]} rotation={[0, -1, 0]} />
-          <Plane color={'#1d4c8d'} position={[0, 6, 0]} rotation={[1, 0, 0]} />
-          <Plane color={'#1d4c8d'} position={[0, -6, 0]} rotation={[-1, 0, 0]} /> */}
+          <Plane rotation={[-Math.PI / 2, 0, 0]} color='white' />
+          {/* <Food number={200} /> */}
           <Suspense fallback={<Dom center>loading ...</Dom>}>
             {/* <Rig> */}
             {Array.from({ length: worms }).map(() => (

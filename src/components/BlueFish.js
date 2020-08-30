@@ -4,7 +4,7 @@ import useFish from './useFish'
 export default function BlueFish(props) {
   const group = useRef()
   const { nodes, materials, ...fish } = useFish(props, group, '/blue-fish.glb')
-  console.log(group)
+
   return (
     <group ref={group} {...fish} dispose={null}>
       <scene name='Scene' {...fish}>
