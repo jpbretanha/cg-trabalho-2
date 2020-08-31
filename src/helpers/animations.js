@@ -1,6 +1,6 @@
 const animationConstants = {
   Orange: {
-    speed: 0.1,
+    speed: 2,
     factor: 0.25 + Math.random()
   },
   BlueFish: {
@@ -8,7 +8,7 @@ const animationConstants = {
     factor: 1 + Math.random() - 0.5
   },
   Shark: {
-    speed: 0.3,
+    speed: 3,
     factor: 0.3 + Math.random()
   },
   Hammerhead: {
