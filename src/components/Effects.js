@@ -14,7 +14,7 @@ export default function Effects({ down }) {
   const composer = useRef()
   const { scene, gl, size, camera } = useThree()
   const aspect = useMemo(() => new THREE.Vector2(512, 512), [])
-  useEffect(() => void composer.current.setSize(size.width, size.height), [size])
+  useEffect(() => composer.current.setSize(size.width, size.height), [size])
   useFrame(() => composer.current.render(), 1)
   return (
     <effectComposer ref={composer} args={[gl]}>

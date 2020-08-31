@@ -2,8 +2,6 @@ import * as THREE from 'three'
 import React, { useRef, useMemo } from 'react'
 import { useFrame, useThree } from 'react-three-fiber'
 
-import Sardine from './Sardine'
-
 export default function Particles({ count, mouse }) {
   const mesh = useRef()
   const light = useRef()
@@ -56,10 +54,9 @@ export default function Particles({ count, mouse }) {
   return (
     <>
       <pointLight ref={light} distance={40} intensity={8} color='lightblue' />
-
       <instancedMesh ref={mesh} args={[null, null, count]}>
-        <dodecahedronBufferGeometry attach='geometry' args={[0.2, 0]} />
-        <meshPhongMaterial attach='material' color='transparent' />
+        <dodecahedronBufferGeometry attach='geometry' args={[0.1, 0]} />
+        <meshPhongMaterial attach='material' color='black' />
       </instancedMesh>
     </>
   )
