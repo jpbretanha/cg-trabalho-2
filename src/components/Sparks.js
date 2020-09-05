@@ -3,6 +3,7 @@ import React, { useRef, useMemo } from 'react'
 import { extend, useFrame, useThree } from 'react-three-fiber'
 import lerp from 'lerp'
 import * as meshline from 'threejs-meshline'
+import { useControl } from 'react-three-gui'
 
 extend(meshline)
 
@@ -28,10 +29,17 @@ function Fatline({ curve, width, color, speed }) {
   )
 }
 
-export default function Sparks({ mouse, count, colors, radius = 10 }) {
+export default function Sparks({ mouse, colors, radius = 10 }) {
+  const count = useControl('Lixo', {
+    type: 'number',
+    min: 0,
+    max: 100,
+    value: 20
+  })
+
   const lines = useMemo(
     () =>
-      new Array(count).fill().map((_, index) => {
+      new Array(Math.trunc(count)).fill().map((_, index) => {
         const pos = new THREE.Vector3(Math.sin(0) * radius * r(), Math.cos(0) * radius * r(), 0)
         const points = new Array(30).fill().map((_, index) => {
           const angle = (index / 20) * Math.PI * 2
@@ -48,7 +56,7 @@ export default function Sparks({ mouse, count, colors, radius = 10 }) {
         const curve = new THREE.CatmullRomCurve3(points).getPoints(1000)
         return {
           color: colors[parseInt(colors.length * Math.random())],
-          width: Math.max(0.1, (0.2 * index) / 10),
+          width: 0.2,
           speed: Math.max(0.001, 0.004 * Math.random()),
           curve
         }

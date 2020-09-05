@@ -13,6 +13,11 @@ import Sparks from './components/Sparks'
 import Food from './components/Food'
 import Button from './components/Button'
 
+import { a, config } from 'react-spring/three'
+import { ControlsProvider, Controls, useControl } from 'react-three-gui'
+
+const GROUP = 'Extra'
+
 function Rig({ children }) {
   const outer = useRef()
   const inner = useRef()
@@ -30,22 +35,21 @@ function Rig({ children }) {
 }
 
 const App = () => {
-  const [down, set] = useState(false)
-  const [earthquake, setEarthquake] = useState(false)
+  const [down, setMouse] = useState(false)
   const mouse = useRef([0, 0])
   const onMouseMove = useCallback(
     ({ clientX: x, clientY: y }) => (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]),
     []
   )
   return (
-    <>
+    <ControlsProvider>
       <Canvas
         concurrent
         shadowMap
         sRGB
         onMouseMove={onMouseMove}
-        onMouseUp={() => set(false)}
-        onMouseDown={() => set(true)}
+        onMouseUp={() => setMouse(false)}
+        onMouseDown={() => setMouse(true)}
         gl={{ alpha: false }}
         camera={{ fov: 100, position: [0, 0, 50] }}
         onCreated={({ gl }) => {
@@ -63,19 +67,17 @@ const App = () => {
             {/* <Rig> */}
             <Particles count={10000} mouse={mouse} />
             <Sparks count={20} mouse={mouse} radius={20} colors={['#e0feff', '#1d4c8d', 'lightblue']} />
-            <Fishes count={20} />
+            <Fishes />
             {Array.from({ length: 40 }).map((_, index) => {
               return <Sardine index={index} />
             })}
-            <Effects down={earthquake} />
+            <Effects />
             {/* </Rig> */}
           </Suspense>
         </Physics>
       </Canvas>
-      <Button cancel={earthquake} onClick={() => setEarthquake(!earthquake)}>
-        {earthquake ? 'cancel' : 'earthquake'}
-      </Button>
-    </>
+      <Controls title='Controles' />
+    </ControlsProvider>
   )
 }
 
