@@ -1,11 +1,8 @@
 import * as THREE from 'three'
-import React, { Suspense, useState, useRef, useCallback, useMemo } from 'react'
-import { Canvas, Dom, useFrame } from 'react-three-fiber'
-import { Physics } from 'use-cannon'
-import lerp from 'lerp'
+import React, { Suspense, useRef, useCallback } from 'react'
+import { Canvas, Dom } from 'react-three-fiber'
 
 import Fishes from './components/Fishes'
-import Plane from './components/Plane'
 import Sardines from './components/Sardines'
 import Particles from './components/Particles'
 import Effects from './components/Effects'
@@ -13,24 +10,7 @@ import Sparks from './components/Sparks'
 
 import { ControlsProvider, Controls } from 'react-three-gui'
 
-function Rig({ children }) {
-  const outer = useRef()
-  const inner = useRef()
-  useFrame(({ clock }) => {
-    outer.current.position.y = lerp(outer.current.position.y, 0, 0.05)
-    inner.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI
-    inner.current.position.z = 5 + -Math.sin(clock.getElapsedTime() / 2) * 10
-    inner.current.position.y = -5 + Math.sin(clock.getElapsedTime() / 2) * 2
-  })
-  return (
-    <group position={[0, -100, 0]} ref={outer}>
-      <group ref={inner}>{children}</group>
-    </group>
-  )
-}
-
 const App = () => {
-  const [down, setMouse] = useState(false)
   const mouse = useRef([0, 0])
   const onMouseMove = useCallback(
     ({ clientX: x, clientY: y }) => (mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]),
@@ -43,8 +23,6 @@ const App = () => {
         shadowMap
         sRGB
         onMouseMove={onMouseMove}
-        onMouseUp={() => setMouse(false)}
-        onMouseDown={() => setMouse(true)}
         gl={{ alpha: false }}
         camera={{ fov: 100, position: [0, 0, 50] }}
         onCreated={({ gl }) => {
@@ -52,21 +30,14 @@ const App = () => {
           gl.setClearColor(new THREE.Color('#020207'))
         }}
       >
-        {/* <ambientLight intensity={4} /> */}
-        {/* <hemisphereLight intensity={0.35} /> */}
         <pointLight distance={100} intensity={1} color='white' />
-        <Physics gravity={[0, 0, -2]}>
-          <Plane rotation={[-Math.PI / 2, 0, 0]} color='white' />
-          <Suspense fallback={<Dom center>loading ...</Dom>}>
-            {/* <Rig> */}
-            <Particles count={10000} mouse={mouse} />
-            <Sparks count={20} mouse={mouse} radius={20} colors={['#e0feff', '#1d4c8d', 'lightblue']} />
-            <Fishes />
-            <Sardines />
-            <Effects />
-            {/* </Rig> */}
-          </Suspense>
-        </Physics>
+        <Suspense fallback={<Dom center>loading ...</Dom>}>
+          <Particles count={10000} mouse={mouse} />
+          <Sparks count={20} mouse={mouse} radius={20} colors={['#e0feff', '#1d4c8d', 'lightblue']} />
+          <Fishes />
+          <Sardines />
+          <Effects />
+        </Suspense>
       </Canvas>
       <Controls title='Controles' />
     </ControlsProvider>

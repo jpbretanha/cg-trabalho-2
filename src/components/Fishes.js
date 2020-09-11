@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import Fish from './Fish'
 import BlueFish from './BlueFish'

@@ -11,7 +11,7 @@ export default function Model(props, ref, url) {
   const [mixer] = useState(() => new THREE.AnimationMixer())
   useEffect(() => {
     if (animations && animations.length > 0) mixer.clipAction(animations[0], ref.current).play()
-  }, [])
+  }, [animations, mixer, ref])
   useFrame((_, delta) => {
     ref.current.rotation.y += Math.sin((delta * factor) / 2) * Math.cos((delta * factor) / 2) * 1.5
     mixer.update(delta * speed)

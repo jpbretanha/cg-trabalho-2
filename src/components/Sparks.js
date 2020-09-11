@@ -61,7 +61,7 @@ export default function Sparks({ mouse, colors, radius = 10 }) {
           curve
         }
       }),
-    [count]
+    [count, colors, radius]
   )
 
   const ref = useRef()
