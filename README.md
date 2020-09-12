@@ -1,6 +1,6 @@
 # Mar interativo.
 
-Projeto desenvolvido para a disciplina de computação gráfica da Universidade Federal de Pelotas. O trabalho visa implementar um fundo do oceano onde o usuário pode controlar o número de lixo, sardinhas e criar um terremoto virtual.
+Projeto desenvolvido para a disciplina de computação gráfica da Universidade Federal de Pelotas. O trabalho visa implementar o fundo do oceano onde o usuário pode controlar o número de lixo que está circulando pela água, número de sardinhas e criar um "terremoto" virtual.
 
 ## Requisitos para rodar o projeto
 
